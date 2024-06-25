@@ -86,24 +86,24 @@ FROM
 	
 			-- 유저 및 그룹 정보
 			INNER JOIN (
-						SELECT 
-							u.id -- 유저 ID
-							, su.friendly_name  AS user_group_name -- 표시이름
-							, 'User' AS TYPE
-						FROM 
-							users u 
-							INNER JOIN system_users su 
-							ON u.system_user_id  = su.id
-							
-						UNION ALL
+					SELECT 
+						u.id -- 유저 ID
+						, su.friendly_name  AS user_group_name -- 표시이름
+						, 'User' AS TYPE
+					FROM 
+						users u 
+						INNER JOIN system_users su 
+						ON u.system_user_id  = su.id
 						
-						SELECT
-							id -- 그룹 ID
-							, "name" AS user_group_name -- 표시이름
-							, 'Group' AS type
-						FROM 
-							"groups"
-					)user_group
+					UNION ALL
+					
+					SELECT
+						id -- 그룹 ID
+						, "name" AS user_group_name -- 표시이름
+						, 'Group' AS type
+					FROM 
+						"groups"
+				)user_group
 			ON ngp.grantee_id = user_group.id AND ngp.grantee_type = user_group.TYPE		
 		WHERE 
 			LOWER(authorizable_type) = 'flow'
