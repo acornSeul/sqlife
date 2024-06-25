@@ -2,4 +2,4 @@
 🥜 모자라지만 느리게 주워담는 중
 
 #### Postgresql
-* Tableau Metadata 활용
+* Repository Data 활용
